@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoWMS — Automotive Spare Parts Warehouse Management</title>
+  <meta name="description" content="Professional warehouse management system for automotive spare parts — PO-controlled receiving, outbound dispatch, and real-time inventory tracking.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- sql.js (SQLite compiled to WebAssembly — runs entirely in browser) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/sql-wasm.js"></script>
+
+  <!-- Plotly.js for charts -->
+  <script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
+
+  <style>
+    /* Inline favicon emoji */
+    :root { color-scheme: dark; }
+  </style>
+</head>
+<body>
+  <!-- Toast container -->
+  <div id="toast"></div>
+
+  <div class="app">
+    <!-- ── Sidebar ── -->
+    <aside class="sidebar">
+      <div class="sb-brand">
+        <div class="sb-logo">🏭</div>
+        <div class="sb-name">AutoWMS</div>
+        <div class="sb-tag">Automotive Spare Parts</div>
+      </div>
+
+      <nav>
+        <a class="nav-item active" data-page="dashboard">
+          <span class="nav-icon">📊</span> Dashboard
+        </a>
+        <a class="nav-item" data-page="purchase-orders">
+          <span class="nav-icon">📦</span> Purchase Orders
+        </a>
+        <a class="nav-item" data-page="inbound-receiving">
+          <span class="nav-icon">📥</span> Inbound Receiving
+        </a>
+        <a class="nav-item" data-page="outbound-dispatch">
+          <span class="nav-icon">📤</span> Outbound Dispatch
+        </a>
+        <a class="nav-item" data-page="inventory">
+          <span class="nav-icon">🗃️</span> Inventory
+        </a>
+      </nav>
+
+      <div class="sb-footer">
+        <div class="sb-footer-txt">v1.0 · SQLite in Browser</div>
+        <button class="btn btn-sm btn-danger" style="margin-top:10px;width:100%;" onclick="if(confirm('Reset all data?')) resetDatabase()">🔄 Reset Data</button>
+      </div>
+    </aside>
+
+    <!-- ── Main ── -->
+    <main class="main">
+      <!-- Loading screen -->
+      <div id="loading">
+        <div class="spinner"></div>
+        <div class="loading-txt">Initializing AutoWMS Database…</div>
+      </div>
+
+      <!-- Pages (hidden until DB ready) -->
+      <div id="page-dashboard"         class="page" style="display:none;"></div>
+      <div id="page-purchase-orders"   class="page" style="display:none;"></div>
+      <div id="page-inbound-receiving" class="page" style="display:none;"></div>
+      <div id="page-outbound-dispatch" class="page" style="display:none;"></div>
+      <div id="page-inventory"         class="page" style="display:none;"></div>
+    </main>
+  </div>
+
+  <!-- Application scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
